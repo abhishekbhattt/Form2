@@ -21,6 +21,26 @@ body{
     min-height: 110vh;
     background: rgba(39, 39, 39, 0.4);
 }
+#submittedData1 h2{
+    color:rgb(255, 5, 5)
+}
+#submittedData1 p{
+    color: rgb(255, 255, 255);
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+}
+#submittedData2 h2{
+    color:rgb(255, 196, 0)
+}
+#submittedData2 p{
+    color: rgb(255, 255, 255);
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+}
 .nav{
     position: fixed;
     top: 0;
