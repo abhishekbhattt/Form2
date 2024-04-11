@@ -7,15 +7,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- Include EmailJS library -->
     <script type="text/javascript">
         (function () {
             emailjs.init({
                 publicKey: "LgkeTDLuVe0Pl3xyo",
             });
         })();
+
+        function submitForm1(event) {
+            event.preventDefault(); // Prevent form submission
+            var formData = new FormData(event.target); // Get form data
+            var name = formData.get("name");
+            var email = formData.get("email");
+            var subject = formData.get("subject");
+            var message = formData.get("message");
+
+            // Display submitted data
+            document.getElementById("submittedName").textContent = name;
+            document.getElementById("submittedEmail").textContent = email;
+            document.getElementById("submittedSubject").textContent = subject;
+            document.getElementById("submittedMessage").textContent = message;
+
+            // Show the submitted data section
+            document.getElementById("submittedData1").style.display = "block";
+
+            // Reset the form
+            event.target.reset();
+
+            // Show alert
+            alert("Form submitted successfully!");
+        }
+        function submitForm2(event) {
+            event.preventDefault(); // Prevent form submission
+            var formData = new FormData(event.target); // Get form data
+            var firstname = formData.get("firstname");
+            var lastname = formData.get("lastname");
+            var email = formData.get("email");
+            var password = formData.get("password");
+
+
+            // Display submitted data
+            document.getElementById("submittedfirstname").textContent = firstname;
+            document.getElementById("submittedlastname").textContent = lastname;
+            document.getElementById("submittedemail").textContent = email;
+            document.getElementById("submittedpassword").textContent = password;
+
+
+            // Show the submitted data section
+            document.getElementById("submittedData2").style.display = "block";
+
+            // Reset the form
+            event.target.reset();
+
+            // Show alert
+            alert("Form submitted successfully!");
+        }
+
+        function hideSubmittedData1() {
+            document.getElementById("submittedData1").style.display = "none";
+        }
+        function hideSubmittedData2() {
+            document.getElementById("submittedData2").style.display = "none";
+        }
     </script>
-    <script src="script.js"></script>
     <title>Micana | Registration</title>
+    <style>
+        /* Add your custom styles here */
+    </style>
 </head>
 
 <body>
@@ -33,8 +92,8 @@
                 </ul>
             </div>
             <div class="nav-button">
-                <button class="btn white-btn" id="loginBtn" onclick="login()">Micana </button>
-                <button class="btn" id="registerBtn" onclick="register()">Micana Premium</button>
+                <button class="btn white-btn" id="loginBtn" onclick="login() ,hideSubmittedData2()">Micana </button>
+                <button class="btn" id="registerBtn" onclick="register() ,hideSubmittedData1()">Micana Premium</button>
             </div>
             <div class="nav-menu-btn">
                 <i class="bx bx-menu" onclick="myMenuFunction()"></i>
@@ -48,28 +107,33 @@
 
             <div class="login-container" id="login">
                 <div class="top">
-                    <span>Want to register in Micana premium? <a href="#" onclick="register()">Micana Pre</a></span>
+                    <span>Want to register in Micana premium? <a href="#"
+                            onclick="register(),hideSubmittedData1()">Micana Pre</a></span>
                     <header>Register yourself</header>
                 </div>
-                <div class="input-box">
-                    <input type="text" class="input-field" id="name" name="name" placeholder="Name">
-                    <i class="bx bx-user"></i>
-                </div>
-                <div class="input-box">
-                    <input type="text" class="input-field" id="email" name="email" placeholder="Email ">
-                    <i class="bx bx-lock-alt"></i>
-                </div>
-                <div class="input-box">
-                    <input type="text" class="input-field" id="subject" name="subject" placeholder="Subject ">
-                    <i class="bx bx-lock-alt"></i>
-                </div>
-                <div class="input-box">
-                    <input type="text" class="input-field" id="message" name="message" placeholder="Message ">
-                    <i class="bx bx-lock-alt"></i>
-                </div>
-                <div class="input-box">
-                    <button type="submit" onclick="sendMail()" class="submit">Submit</button>
-                </div>
+                <form id="registerForm" onsubmit="submitForm1(event)">
+                    <div class="input-box">
+                        <input type="text" class="input-field" id="name" name="name" placeholder="Name" required>
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="email" class="input-field" id="email" name="email" placeholder="Email" required>
+                        <i class="bx bx-lock-alt"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" id="subject" name="subject" placeholder="Subject"
+                            required>
+                        <i class="bx bx-lock-alt"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" required id="message" name="message"
+                            placeholder="Message">
+                        <i class="bx bx-lock-alt"></i>
+                    </div>
+                    <div class="input-box">
+                        <button type="submit" class="submit">Submit</button>
+                    </div>
+                </form>
                 <div class="two-col">
                     <div class="one">
                         <input type="checkbox" id="login-check">
@@ -87,27 +151,32 @@
                     <span>Want to register in Free version ? <a href="#" onclick="login()">Micana Free</a></span>
                     <header>Register in Micana Pre</header>
                 </div>
-                <div class="two-forms">
-                    <div class="input-box">
-                        <input type="text" class="input-field" placeholder="Firstname">
-                        <i class="bx bx-user"></i>
+                <form onsubmit="submitForm2(event)">
+                    <div class="two-forms">
+                        <div class="input-box">
+                            <input type="text" class="input-field" required id="firstname" name="firstname"
+                                placeholder="Firstname">
+                            <i class="bx bx-user"></i>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="input-field" required id="lastname" name="lastname"
+                                placeholder="Lastname">
+                            <i class="bx bx-user"></i>
+                        </div>
                     </div>
                     <div class="input-box">
-                        <input type="text" class="input-field" placeholder="Lastname">
-                        <i class="bx bx-user"></i>
+                        <input type="email" class="input-field" required id="email" name="email" placeholder="Email">
+                        <i class="bx bx-envelope"></i>
                     </div>
-                </div>
-                <div class="input-box">
-                    <input type="text" class="input-field" placeholder="Email">
-                    <i class="bx bx-envelope"></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" class="input-field" placeholder="Password">
-                    <i class="bx bx-lock-alt"></i>
-                </div>
-                <div class="input-box">
-                    <input type="submit" class="submit" value="Register">
-                </div>
+                    <div class="input-box">
+                        <input type="password" class="input-field" required id="password" name="password"
+                            placeholder="Password">
+                        <i class="bx bx-lock-alt"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="submit" class="submit" value="Register">
+                    </div>
+                </form>
                 <div class="two-col">
                     <div class="one">
                         <input type="checkbox" id="register-check">
@@ -119,6 +188,26 @@
                 </div>
             </div>
         </div>
+
+        <!-- Display Submitted Data -->
+        <div id="submittedData1" style="display: none;">
+            <h2>Registered to Free </h2>
+            <p>Name: <span id="submittedName"></span></p>
+            <p>Email: <span id="submittedEmail"></span></p>
+            <p>Subject: <span id="submittedSubject"></span></p>
+            <p>Message: <span id="submittedMessage"></span></p>
+        </div>
+
+        <div id="submittedData2" style="display: none;">
+            <h2>
+                Registered to Premium
+            </h2>
+            <p>FirstName: <span id="submittedfirstname"></span></p>
+            <p>LastName: <span id="submittedlastname"></span></p>
+            <p>Email: <span id="submittedemail"></span></p>
+            <p>Password: <span id="submittedpassword"></span></p>
+        </div>
+
     </div>
 
 
@@ -134,16 +223,11 @@
             }
         }
 
-    </script>
-
-    <script>
-
-        var a = document.getElementById("loginBtn");
-        var b = document.getElementById("registerBtn");
-        var x = document.getElementById("login");
-        var y = document.getElementById("register");
-
         function login() {
+            var x = document.getElementById("login");
+            var y = document.getElementById("register");
+            var a = document.getElementById("loginBtn");
+            var b = document.getElementById("registerBtn");
             x.style.left = "4px";
             y.style.right = "-520px";
             a.className += " white-btn";
@@ -153,6 +237,10 @@
         }
 
         function register() {
+            var x = document.getElementById("login");
+            var y = document.getElementById("register");
+            var a = document.getElementById("loginBtn");
+            var b = document.getElementById("registerBtn");
             x.style.left = "-510px";
             y.style.right = "5px";
             a.className = "btn";
